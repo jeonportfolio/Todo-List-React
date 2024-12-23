@@ -6,4 +6,9 @@
 - `npm install`<br/>
 
 
+## 할일의 추가 & 삭제 옵션  <br/>
+
+- controls와 todoList와의 교류 APP.jsx에서 데이터 관리 <br/>
+- 할일 -> 전체 선택 & 해제 기능<br/>
+
 
