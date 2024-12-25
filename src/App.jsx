@@ -1,69 +1,69 @@
-import { useRef, useState } from "react";
+import { useEffect, useReducer } from "react";
 import Controls from "./components/Controls";
 import Layout from "./components/Layout";
 import Title from "./components/Title";
 import TodoItem from "./components/TodoItem";
 import TodoList from "./components/TodoList";
+import { ADD_TODO, DELETE_TODO, DELETE_TODO_COMPLETED, init, initialState, reducer, SET_FILTER, TOGGLE_TODO, TOGGLE_TODO_ALL, UPDATE_TODO } from "./reducer";
 
 function App() {
-  const idRef = useRef(0)
-  const [list, setList] = useState([]);
-  const [filterType, setFilterType] = useState("ALL");
+  const [state, dispatch] = useReducer(reducer, initialState, init);
+
+  useEffect(() => {
+    window.localStorage.setItem('TODO', JSON.stringify(state.list));
+    window.localStorage.setItem('ID', JSON.stringify(state.id))
+  }, [state])
+ 
   const handleChangeFilterType = (type) => {
-    setFilterType(type);
+    dispatch({ type: SET_FILTER, payload: type});
   }
 
   const handleSubmit = (value) => {
-    setList(prevList => prevList.concat({
-      id: (idRef.current += 1),
-      text: value,
-      completed: false,
-    }))
+    dispatch({type: ADD_TODO, payload:value });
   }
 
+  //체크박스 체크 선택 & 해제
   const handleToggle = (id) => {
-      setList(prevList => prevList.map((item) => {
-        if(item.id === id) {
-          return {...item, completed: !item.completed};
-        }
-        return item;
-      })
-    );
+     dispatch({type : TOGGLE_TODO, payload: id});
   };
 
+  //체크박스 전체체크 & 전체해제
   const handleToggleAll = (flag) => {
-    setList((prevList) => 
-      prevList.map((item) => ({...item, completed: flag}))
-    );
+    dispatch({type : TOGGLE_TODO_ALL, payload: flag});
   };
+
+  //  항목 지우기 
   const handleDelete = (id) => {
-    setList(prevList => prevList.filter((item) => item.id !== id))
+    dispatch({type : DELETE_TODO, payload: id});
   } 
 
-// 선택된 항목 삭제 -> 체크되지 않은 것만 남음
-const handleDeleteCompleted = () => {
- setList((preList) => preList.filter((item) => !item.completed))
-};
+  //선택된 항목 모두 삭제
+  const handleDeleteCompleted = () => {
+    dispatch({type : DELETE_TODO_COMPLETED});
+  };
 
 //수정한 내용 업데이트 
 const handleUpdate = (id, text) => {
-  setList(prevList => prevList.map (item => {
-    if(item.id === id) {
-      return {...item, text };
-    }
-    return item;
-  }))
-}
+   dispatch({
+      type : UPDATE_TODO, 
+      payload:{
+        id,
+        text,
+
+      }  
+   });
+};
 
 //SELECT 리스트 바꾸기 
 
-const filteredList = list.filter(item => {
-  if(filterType === 'ALL') {
-    return item;
-  }else if (filterType == 'TODO') {
-    return !item.completed
-  }else {
-    return item.completed;
+const filteredList = state.list.filter(item => {
+  switch (state.filterType) {
+    case 'TODO':
+      return !item.completed;
+    case 'COMPLETED':
+      return item.completed;
+    default:
+      return true;
   }
 })
 
@@ -72,7 +72,7 @@ const filteredList = list.filter(item => {
       <Layout>
         <Title/>
         <Controls 
-                  filterType={filterType} 
+                  filterType={state.filterType} 
                   onChangeFilterType={handleChangeFilterType} 
                   onSubmit={handleSubmit}
           />
