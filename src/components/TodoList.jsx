@@ -1,23 +1,39 @@
+import { useContext } from 'react';
 import TodoItem from './TodoItem';
 import './todoList.css'
+import { TodoContext } from '../context';
+import { DELETE_TODO_COMPLETED, TOGGLE_TODO, TOGGLE_TODO_ALL } from '../reducer';
 
-function TodoList({ 
-    data, 
-    onToggle, 
-    onToggleAll, 
-    onDelete, 
-    onDeleteCompleted,
-    onUpdate
-}) {
+function TodoList() {
     
-    // 전체선택 
-    const isAllCompleted = 
-        data.length > 0 && data.every((item) => item.completed);
+    const { state, dispatch } = useContext(TodoContext);
     
     // 선택된 개수 세기 -> 삭제시 사용
-    const completedCount = data.filter((item) => item.completed).length;
+    const completedCount = state.list.filter((item) => item.completed).length;
+    const handleToggleAll = e => {
+        dispatch({ type: TOGGLE_TODO_ALL, payload: e.target.checked })
+        
+    };
 
+    const handleDeleteCompleted = () => {
+        dispatch({type:DELETE_TODO_COMPLETED})
+    }
 
+    const filteredList = state.list.filter((item) => {
+        switch (state.filterType) {
+            case "TODO":
+                return !item.completed;
+            case "COMPLETED": 
+                return item.completed;
+            default:
+                return true;
+        }
+    })
+    
+     // 전체선택 
+     const isAllCompleted = 
+     filteredList.length > 0 && 
+     filteredList.every((item) => item.completed);
 
     return (
         <div className="todo-list">
@@ -26,11 +42,11 @@ function TodoList({
                     type="checkbox" 
                     className="todo-checkbox" 
                     checked={isAllCompleted}
-                    onChange={(e) => onToggleAll(e.target.checked)}
+                    onChange={handleToggleAll}
                 />
                 <p className="todo-header-text">할 일</p>
                 {completedCount > 0 && (
-                     <button className='todo-header-button' onClick={onDeleteCompleted}>
+                     <button className='todo-header-button' onClick={handleDeleteCompleted}>
                         {completedCount}개 삭제
                      </button>
                 )}
@@ -38,16 +54,8 @@ function TodoList({
             </div>
             <div>
             <div>
-                {data.map((item) => (
-                    <TodoItem 
-                        id={item.id}
-                        key={item.id}
-                        text={item.text} 
-                        completed={item.completed}
-                        onToggle= {() => onToggle(item.id)}
-                        onDelete= {() => onDelete(item.id)}
-                        onUpdate = {onUpdate}
-                    />
+                {filteredList.map((item) => (
+                    <TodoItem key={item.id} {...item}/>
                 ))}
             </div>
             </div>

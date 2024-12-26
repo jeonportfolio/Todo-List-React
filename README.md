@@ -29,6 +29,12 @@
 
 - useEffect로 localstorage를 사용<br/>
 - JSON.stringfy 문자열로 저장 <br/>
+- app.jsx에서는 useEffect로 저장의 역할 index.js는 저장된 파일을 불러오는 역할 <br/><br/>
+
+## Context API 활용 <br/>
+
+- 유지보수와 가독성 강화 <br/>
+-
 
 
 
