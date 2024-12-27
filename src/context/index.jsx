@@ -11,7 +11,7 @@ export const TodoProvider = ({ children }) => {
       useEffect(() => {
         window.localStorage.setItem('TODO', JSON.stringify(state.list));
         window.localStorage.setItem('ID', JSON.stringify(state.id))
-      }, [state])
+      }, [state]) //[state] 의존성 배열로 state가 변경될때만 작동 
 
     return <TodoContext.Provider value={{ state, dispatch }}>
                 {children}

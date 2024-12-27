@@ -12,7 +12,7 @@ export const init = () => {
     const savedID = JSON.parse(window.localStorage.getItem('ID')) || 0;
     return {
         list:savedTodo,
-        id: savedID ? Number(savedID) : 0,
+        id: savedID ? Number(savedID) : 0, //문자열된 아이디를 숫자로 바꿈
         filterType: "ALL",
     }
 }
@@ -45,10 +45,12 @@ export const reducer = (state, action) => {
                     return item
                 }), 
             }; 
+
         case DELETE_TODO:
             return{
                 ...state,
                 list:state.list.filter((item) => item.id !== action.payload),
+                //선택 되지 않은 id만 남음
             }
         case TOGGLE_TODO:
             return {

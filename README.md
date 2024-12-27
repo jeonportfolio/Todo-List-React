@@ -1,5 +1,11 @@
 # REACT 할일 기록 사이트 만들기<br/>
 
+```
+    useReducer & useEffect & localstorage & context API를 활용한 할일 기록 사이트 입니다. 
+```
+<a herf="https://defendingearth.netlify.app/">슈팅게임 바로가기(클릭)</a><br/>
+<img src="./todo.png" alt="이미지 설명" width="400"/>
+
 ## project setting <br/>
 - `npm create vite@latest`<br/>
 - REACT 버전 `^18.2.0`<br/>
@@ -34,7 +40,7 @@
 ## Context API 활용 <br/>
 
 - 유지보수와 가독성 강화 <br/>
--
+
 
 
 
