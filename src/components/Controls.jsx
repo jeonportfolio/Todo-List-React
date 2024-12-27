@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import "./controls.css"
+import "./Controls.css"
 import { TodoContext } from "../context";
 import { ADD_TODO, SET_FILTER } from "../reducer";
 
