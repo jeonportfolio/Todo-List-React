@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import TodoItem from './TodoItem';
-import './todoList.css'
+import './TodoList.css'
 import { TodoContext } from '../context';
-import { DELETE_TODO_COMPLETED, TOGGLE_TODO, TOGGLE_TODO_ALL } from '../reducer';
+import { DELETE_TODO_COMPLETED, TOGGLE_TODO_ALL } from '../reducer';
 
 function TodoList() {
     

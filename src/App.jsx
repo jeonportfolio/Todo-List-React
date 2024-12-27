@@ -1,10 +1,9 @@
-import { useEffect, useReducer } from "react";
+
 import Controls from "./components/Controls";
 import Layout from "./components/Layout";
 import Title from "./components/Title";
 import TodoItem from "./components/TodoItem";
 import TodoList from "./components/TodoList";
-import { ADD_TODO, DELETE_TODO, DELETE_TODO_COMPLETED, init, initialState, reducer, SET_FILTER, TOGGLE_TODO, TOGGLE_TODO_ALL, UPDATE_TODO } from "./reducer";
 import { TodoProvider } from "./context";
 
 function App() {
