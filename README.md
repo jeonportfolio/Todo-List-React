@@ -40,6 +40,11 @@
 
 - 유지보수와 가독성 강화 <br/>
 
+## CSS 다양한 방식 사용 <br/>
+
+- Emotion & Tailwindcss로 변경 
+- Emotion 설치 `npm i @emotion/react@11.11.4 @emotion/styled@11.11.5`
+
 
 
 

@@ -1,8 +1,12 @@
-import "./Title.css";
+import styled from "@emotion/styled";
 
 function Title() {
-    return <h1 className="title">할일 기록 사이트</h1>
+    return <Container>할일 기록 사이트</Container>
     
 }
+
+const Container = styled.h1`
+    margin-bottom: 16px;
+`;
 
 export default Title
