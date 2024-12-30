@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 function Title() {
-    return <Container>할일 기록 사이트</Container>
+    return <h1 className="text-2xl mb-[16px]">할일 기록 사이트</h1>
     
 }
 

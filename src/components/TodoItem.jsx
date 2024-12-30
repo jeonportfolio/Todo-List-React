@@ -3,6 +3,25 @@ import { TodoContext } from "../context";
 import { DELETE_TODO, TOGGLE_TODO, UPDATE_TODO } from "../reducer";
 import styled from "@emotion/styled";
 
+
+const itemClassName = `
+    flex items-center h-[65px] gap-[12px] px-[12px] py-[0px]
+`;
+
+const checkboxClassName = `w-[16px] h-[16px]`;
+
+const textClassName = `grow`;
+
+const buttonClassName = `
+    w-[30px], h-[30px] bg-black text-white border-solid border-gray-100
+`;
+
+const inputClassName = `
+    grow border-[1px] border-solid border-gray-100 rounded-[6px]
+    bg-transparent px-[10px] py-[4px] text-[16px] leading-20px text-white
+ `
+
+
 function TodoItem({ id, text, completed }) {
     const { dispatch } = useContext(TodoContext)
     
@@ -29,19 +48,27 @@ function TodoItem({ id, text, completed }) {
 
 
     return(
-            <Item>
-                <Checkbox
+            <div className={itemClassName}>
+                <input className={checkboxClassName}
                     type="checkbox" 
                     checked={completed}
                     onChange={handleToggle}
                 />
                 {
-                    edit ? <Input  value={text} onChange={handleChange}/> : <Text completed={completed}>{text}</Text>
+                    edit ? (
+                        <input className={inputClassName}  value={text} onChange={handleChange}/>
+                    ) : (
+                        <p className={[textClassName, completed && 'line-through'].join("")} 
+                            completed={completed}
+                        >
+                            {text}
+                        </p>
+                        )
                 }
               
-                <Button className='todo-item-button' onClick={handleEdit}>수정</Button>
-                <Button className='todo-item-button' onClick={handleDelete}>삭제</Button>
-            </Item>
+                <button className={buttonClassName} onClick={handleEdit}>수정</button>
+                <button className={buttonClassName} onClick={handleDelete}>삭제</button>
+            </div>
             
     ) 
 }

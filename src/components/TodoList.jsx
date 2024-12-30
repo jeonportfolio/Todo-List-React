@@ -4,6 +4,30 @@ import { TodoContext } from '../context';
 import { DELETE_TODO_COMPLETED, TOGGLE_TODO_ALL } from '../reducer';
 import styled from '@emotion/styled';
 
+const listClassName = `
+    border-[1px] border-solid border-gray-100
+    rounded-[6px]
+    mt-[16px]
+`
+
+const headerClassName = `
+    flex items-center h-[40px] px-[12px] py-[0px]
+    gap-[12px]
+`
+
+const checkboxClassName = `
+    w-[16px] h-[16px]
+`
+const textClassName = `
+    grow
+`;
+
+const buttonClassName = `
+    border-[1px] border-solid border-gray-100
+    rounded-[6px] bg-transparent px-[12px] py-[0px]
+    text-white shrink h-[30px]
+`
+
 function TodoList() {
     
     const { state, dispatch } = useContext(TodoContext);
@@ -36,21 +60,24 @@ function TodoList() {
      filteredList.every((item) => item.completed);
 
     return (
-        <List>
-            <Header>
-                <Checkbox 
+        <div className={listClassName}>
+            <div className={headerClassName}>
+                <input className={checkboxClassName} 
                     type="checkbox" 
                     checked={isAllCompleted}
                     onChange={handleToggleAll}
                 />
-                <Text >할 일</Text>
+                <p className={textClassName} >할 일</p>
                 {completedCount > 0 && (
-                     <Button  onClick={handleDeleteCompleted}>
+                     <button 
+                        className= {buttonClassName} 
+                        onClick={handleDeleteCompleted}
+                    >
                         {completedCount}개 삭제
-                     </Button>
+                     </button>
                 )}
                
-            </Header>
+            </div>
             <div>
             <div>
                 {filteredList.map((item) => (
@@ -58,7 +85,7 @@ function TodoList() {
                 ))}
             </div>
             </div>
-        </List>
+        </div>
     )
 }
 

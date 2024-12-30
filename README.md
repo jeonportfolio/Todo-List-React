@@ -42,8 +42,12 @@
 
 ## CSS 다양한 방식 사용 <br/>
 
-- Emotion & Tailwindcss로 변경 
-- Emotion 설치 `npm i @emotion/react@11.11.4 @emotion/styled@11.11.5`
+- Emotion 로 변경 <br/>
+- Emotion 설치 `npm i @emotion/react@11.11.4 @emotion/styled@11.11.5`<br/>
+- Tailwindcss로 변경 <br/>
+- Tailwindcss설칭 `npm install -D tailwindcss@3.4.3 postcss autoprefixer`<br/>
+- `npx tailwindcss init -p`<br/>
+- `tailwindcss.com`에서 display 선택<br/>
 
 
 

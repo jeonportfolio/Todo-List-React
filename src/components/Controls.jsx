@@ -4,6 +4,7 @@ import { ADD_TODO, SET_FILTER } from "../reducer";
 import styled from "@emotion/styled";
 
 function Controls() {
+    
     const { state, dispatch } = useContext(TodoContext);
     const [text, setText] = useState("");
     const handleChange = (e) => {
@@ -19,24 +20,24 @@ function Controls() {
         dispatch({ type: SET_FILTER, payload: e.target.value })
     }
 
-    return <Control className="controls">
-        <Input  
+    return <div className="flex gap-[6px] h-[30px]">
+        <input  
+            className= {inputClassName}
             type="text" 
-            className="input" 
             value={text} 
             onChange={handleChange} 
         />
-        <Button className="button" onClick={handleSubmit}>추가</Button>
-        <Select 
-            className="select" 
+        <button className={commonclassName} onClick={handleSubmit}>추가</button>
+        <select 
+            className={commonclassName}
             value={state.filterType} 
             onChange={handleChangeFilterType}
         >
             <option value="ALL">전체</option>
             <option value="TODO">할 일</option>
             <option value="COMPLETED">완료</option>
-        </Select>
-    </Control>
+        </select>
+    </div>
 }
 
 
@@ -54,6 +55,19 @@ const Input = styled.input`
     line-height: 20px;
     color: white;
 `;
+
+const inputClassName = `
+    grow border-[1px] border-solid rounded-[100px] bg-transparent
+    px-[12px] py-[4px] text-[16] leading-[20px] text-white
+`;
+
+const commonclassName = `
+    border-[1px] border-solid border-gray-100 rounded-[6px] bg-black
+    bg-transparent px-[12px] py-[0px] text-white
+    shrink
+`
+
+
 const Button = styled.button`
      border: 1px solid gray;
     border-radius: 6px;

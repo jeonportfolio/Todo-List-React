@@ -1,7 +1,13 @@
 import styled from "@emotion/styled";
 
+const layoutClassName = `
+    border-[1px] border-solid border-gray-100
+    p-[32px] rounded-[6px] w-[50%] m-auto
+`
+
+
 function Layout({children}) {
-    return <Container>{children}</Container>
+    return <div className={layoutClassName}>{children}</div>
 }
 
 
