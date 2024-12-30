@@ -13,7 +13,8 @@ const checkboxClassName = `w-[16px] h-[16px]`;
 const textClassName = `grow`;
 
 const buttonClassName = `
-    w-[30px], h-[30px] bg-black text-white border-solid border-gray-100
+    w-[30px], h-[30px] bg-black text-white  border-[1px] border-solid border-gray-100
+    p-[3px]
 `;
 
 const inputClassName = `
@@ -58,8 +59,8 @@ function TodoItem({ id, text, completed }) {
                     edit ? (
                         <input className={inputClassName}  value={text} onChange={handleChange}/>
                     ) : (
-                        <p className={[textClassName, completed && 'line-through'].join("")} 
-                            completed={completed}
+                        <p className={[textClassName, completed && "line-through"].join(" ")} 
+                           data-completed={completed}
                         >
                             {text}
                         </p>
