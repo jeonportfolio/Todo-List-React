@@ -63,7 +63,7 @@ const inputClassName = `
 
 const commonclassName = `
     border-[1px] border-solid border-gray-100 rounded-[6px] bg-black
-    bg-transparent px-[12px] py-[0px] text-white
+    px-[12px] py-[0px] text-white
     shrink
 `
 
